@@ -330,6 +330,48 @@ body{background:linear-gradient(180deg,#0f172a 0%,#111827 100%);color:#e2e8f0}
 #board-cover-preview{max-height:150px;object-fit:cover}
 @media(max-width:767px){body{padding-bottom:76px}.screen{padding:14px}#screen-boards{padding:16px}#screen-board{padding:14px 12px 6px}.board-hdr{padding:14px;border-radius:18px}.board-title-text{font-size:18px}.boards-grid{grid-template-columns:1fr}.board-card,.board-add{height:118px}.col{min-width:87vw}.card-acts{grid-template-columns:1fr}.ca{min-height:44px}.bnav{background:#081224;border-top:1px solid rgba(148,163,184,.12)}.bnav-item{color:#7f93ac}.bnav-item.active{color:#818cf8}}
 
+
+/* ===== VISUAL OPERAÇÃO: CAPA PADRONIZADA E ALERTAS ===== */
+.boards-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.board-card{height:150px;border-radius:18px;border:1px solid rgba(99,102,241,.18);background:linear-gradient(180deg,#0f172a,#111c31);box-shadow:0 18px 36px rgba(2,6,23,.24);overflow:hidden}
+.board-card:before,.board-card-overlay{display:none!important}
+.board-card-media{position:absolute;top:0;left:0;right:0;height:calc(100% - 48px);border-radius:18px 18px 0 0;overflow:hidden;background:#1e293b;background-repeat:no-repeat}
+.board-card.has-cover .board-card-media{background-size:cover!important;background-position:center!important;filter:saturate(1.02) contrast(1.02)}
+.board-card-media:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,15,32,.04) 0%,rgba(8,15,32,.22) 56%,rgba(8,15,32,.72) 100%)}
+.board-card-media-glow{position:absolute;left:0;right:0;bottom:48px;height:22px;background:linear-gradient(180deg,rgba(30,41,59,0),rgba(30,41,59,.35));pointer-events:none;z-index:1}
+.board-card-footer{position:absolute;left:0;right:0;bottom:0;height:48px;background:linear-gradient(180deg,#0b1730 0%,#0a1430 100%);border-top:1px solid rgba(99,102,241,.14);z-index:1}
+.board-card-name{display:flex;align-items:center;min-height:48px;padding:0 16px 2px;font-size:14px;font-weight:800;letter-spacing:.01em;color:#fff;text-shadow:none;background:none;z-index:2}
+.board-card-del{top:12px;right:12px;width:30px;height:30px;border-radius:12px;background:rgba(15,23,42,.78);border:1px solid rgba(255,255,255,.14);box-shadow:0 8px 18px rgba(2,6,23,.25)}
+.board-card-badge{top:12px;left:12px;min-width:48px;justify-content:center;gap:8px;padding:8px 12px;border-radius:999px;background:linear-gradient(180deg,rgba(42,17,20,.96),rgba(89,16,27,.92));border:1px solid rgba(255,112,112,.45);box-shadow:0 8px 22px rgba(127,29,29,.38);font-size:13px;font-weight:900;letter-spacing:.02em}
+.board-card-badge.show{display:inline-flex}
+.board-card-badge-icon{width:18px;height:18px;background:#ff4d4f;font-size:12px;font-weight:900;box-shadow:0 0 0 4px rgba(255,77,79,.16)}
+.board-card-badge.pulse{animation:softPulse 2.2s ease-in-out infinite}
+@keyframes softPulse{
+  0%,100%{transform:translateY(0) scale(1);box-shadow:0 8px 22px rgba(127,29,29,.36)}
+  50%{transform:translateY(-1px) scale(1.05);box-shadow:0 12px 28px rgba(220,38,38,.42)}
+}
+@media(max-width:640px){
+  .boards-grid{grid-template-columns:1fr;gap:14px}
+  .board-card{height:156px}
+}
+
+.col-head{padding:14px 14px 12px}
+.col-dot{width:8px;height:8px}
+.col-name{font-size:11px;font-weight:800;letter-spacing:.08em}
+.cnt{min-width:32px;height:32px;padding:0 11px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;font-size:15px;font-weight:900;letter-spacing:-.02em;border:1px solid transparent;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 10px 22px rgba(2,6,23,.18)}
+.cnt.has-items{animation:badgeAttention 2.6s ease-in-out infinite}
+.cnt.is-empty{opacity:.9}
+@keyframes badgeAttention{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.08)}
+}
+.c0 .cnt{background:linear-gradient(180deg,#372a8a,#5b43d8);color:#f5f3ff;border-color:rgba(196,181,253,.32);box-shadow:0 0 0 4px rgba(109,93,231,.12),0 12px 24px rgba(76,29,149,.26)}
+.c1 .cnt{background:linear-gradient(180deg,#1347a8,#2563eb);color:#eff6ff;border-color:rgba(147,197,253,.34);box-shadow:0 0 0 4px rgba(37,99,235,.12),0 12px 24px rgba(30,64,175,.24)}
+.c2 .cnt{background:linear-gradient(180deg,#9a5b09,#f59e0b);color:#fff7ed;border-color:rgba(253,230,138,.4);box-shadow:0 0 0 4px rgba(245,158,11,.14),0 12px 24px rgba(180,83,9,.24)}
+.c3 .cnt{background:linear-gradient(180deg,#0369a1,#06b6d4);color:#ecfeff;border-color:rgba(103,232,249,.34);box-shadow:0 0 0 4px rgba(6,182,212,.12),0 12px 24px rgba(8,145,178,.22)}
+.c4 .cnt{background:linear-gradient(180deg,#0f766e,#10b981);color:#ecfdf5;border-color:rgba(110,231,183,.3);box-shadow:0 0 0 4px rgba(16,185,129,.1),0 12px 24px rgba(5,150,105,.18)}
+.c4 .cnt.has-items{animation:none}
+
 </style></head><body>
 
 <!-- ===== LOGIN SCREEN ===== -->
@@ -872,7 +914,7 @@ function loadTaskSummary(){
     const counts={}
     snap.docs.forEach(d=>{
       const t=d.data()||{}
-      if(t.col===0&&t.boardId)counts[t.boardId]=(counts[t.boardId]||0)+1
+      if(t.boardId&&Number(t.col)!==4)counts[t.boardId]=(counts[t.boardId]||0)+1
     })
     boardTodoCounts=counts
     renderHome()
@@ -882,16 +924,18 @@ function renderHome(){
   const edit=canEdit()
   document.getElementById('boards-grid').innerHTML=
     boards.map(b=>{
-      const todo=boardTodoCounts[b.id]||0
-      const bg=b.cover
-        ?`background-image:linear-gradient(180deg,rgba(15,23,42,.08),rgba(15,23,42,.72)),url('${b.cover}');background-size:cover;background-position:center;`
-        :`background:linear-gradient(180deg,${b.color||'#3c3489'} 0%,${b.color||'#3c3489'}dd 100%);`
-      return `<div class="board-card${b.cover?' has-cover':''}" style="${bg}" onclick="openBoard('${b.id}','${(b.name||'').replace(/'/g,"\\'")}')">
-        <div class="board-card-badge ${todo>0?'show':''}" title="Itens em A Fazer">
-          <span class="board-card-badge-icon">•</span><span>${todo}</span>
+      const pending=boardTodoCounts[b.id]||0
+      const mediaStyle=b.cover
+        ?`background-image:url('${b.cover}');background-size:cover;background-position:center;`
+        :`background:linear-gradient(135deg,${b.color||'#3c3489'} 0%,${b.color||'#3c3489'}dd 58%,rgba(15,23,42,.95) 100%);`
+      return `<div class="board-card${b.cover?' has-cover':''}" onclick="openBoard('${b.id}','${(b.name||'').replace(/'/g,"\\'")}')">
+        <div class="board-card-media" style="${mediaStyle}"></div>
+        <div class="board-card-media-glow"></div>
+        <div class="board-card-footer"></div>
+        <div class="board-card-badge ${pending>0?'show pulse':''}" title="Pendências em aberto até concluir">
+          <span class="board-card-badge-icon">!</span><span>${pending}</span>
         </div>
         ${edit?`<button class="board-card-del" onclick="event.stopPropagation();delBoard('${b.id}')">✕</button>`:''}
-        <div class="board-card-overlay"></div>
         <div class="board-card-name">${esc(b.name)}</div>
       </div>`
     }).join('')+
@@ -954,7 +998,7 @@ function renderBoard(){
   document.getElementById('board-cols').innerHTML=COLS.map(c=>{
     const cards=tasks.filter(t=>t.col===c.idx)
     return`<div class="col ${c.cls}">
-      <div class="col-head"><div style="display:flex;align-items:center"><span class="col-dot ${c.dot}"></span><span class="col-name">${c.label}</span></div><span class="cnt">${cards.length}</span></div>
+      <div class="col-head"><div style="display:flex;align-items:center"><span class="col-dot ${c.dot}"></span><span class="col-name">${c.label}</span></div><span class="cnt ${cards.length>0?'has-items':'is-empty'}">${cards.length}</span></div>
       <div class="col-body">
         ${!cards.length?'<div class="empty">Sem pedidos</div>':cards.map(t=>`
         <div class="card prio-${t.prio||'media'}" id="card-${t.id}">
