@@ -315,20 +315,30 @@ body{background:linear-gradient(180deg,#0f172a 0%,#111827 100%);color:#e2e8f0}
 .bprio,.btag{padding:4px 8px;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:.02em}
 .btag{background:rgba(15,23,42,.74);border:1px solid rgba(148,163,184,.14);color:#94a3b8}
 .av{width:26px;height:26px;font-size:10px}
-.card-acts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid rgba(148,163,184,.12)}
-.ca{min-height:42px;padding:10px 10px;border-radius:12px;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
-.ca-up{color:#bfdbfe;border-color:rgba(59,130,246,.32);background:rgba(30,64,175,.16)}
-.ca-up:hover,.ca-up:active{background:rgba(30,64,175,.24);color:#eff6ff;border-color:rgba(96,165,250,.44)}
-.ca-back{color:#dbeafe;border-color:rgba(148,163,184,.2);background:rgba(15,23,42,.58)}
-.ca-back:hover,.ca-back:active{background:rgba(30,41,59,.9);color:#fff;border-color:rgba(148,163,184,.3)}
-.ca-fwd{color:#bbf7d0;border-color:rgba(34,197,94,.26);background:rgba(20,83,45,.24)}
-.ca-fwd:hover,.ca-fwd:active{background:rgba(20,83,45,.34);color:#f0fdf4;border-color:rgba(74,222,128,.36)}
-.ca-del{color:#fecaca;border-color:rgba(239,68,68,.24);background:rgba(127,29,29,.18)}
-.ca-del:hover,.ca-del:active{background:rgba(127,29,29,.3);color:#fff1f2;border-color:rgba(248,113,113,.36)}
+.card-acts{display:flex;flex-direction:column;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid rgba(148,163,184,.12)}
+.card-acts-row{display:flex;gap:8px}
+.card-acts-row .ca{flex:1}
+.ca{min-height:44px;padding:11px 12px;border-radius:13px;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.ca.full{width:100%}
+.ca-up{color:#bfdbfe;border-color:rgba(59,130,246,.32);background:linear-gradient(180deg,rgba(15,45,96,.55),rgba(20,54,116,.34))}
+.ca-up:hover,.ca-up:active{background:linear-gradient(180deg,rgba(18,57,122,.68),rgba(28,74,158,.42));color:#eff6ff;border-color:rgba(96,165,250,.44)}
+.ca-back{color:#dbeafe;border-color:rgba(148,163,184,.22);background:linear-gradient(180deg,rgba(15,23,42,.82),rgba(30,41,59,.88))}
+.ca-back:hover,.ca-back:active{background:linear-gradient(180deg,rgba(30,41,59,.96),rgba(51,65,85,.96));color:#fff;border-color:rgba(148,163,184,.34)}
+.ca-fwd{color:#ecfdf5;border-color:rgba(74,222,128,.34);background:linear-gradient(180deg,rgba(8,87,66,.92),rgba(18,115,83,.94));box-shadow:0 0 0 1px rgba(34,197,94,.08),0 10px 18px rgba(6,78,59,.28)}
+.ca-fwd:before{content:'';position:absolute;inset:-40% auto -40% -30%;width:36%;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.14),rgba(255,255,255,0));transform:rotate(18deg);animation:fwdSweep 3.2s ease-in-out infinite}
+.ca-fwd:hover,.ca-fwd:active{background:linear-gradient(180deg,rgba(10,112,84,.96),rgba(20,138,102,.96));color:#fff;border-color:rgba(110,231,183,.52);box-shadow:0 0 0 1px rgba(74,222,128,.12),0 12px 24px rgba(6,95,70,.34)}
+.ca-del{color:#fecaca;border-color:rgba(239,68,68,.24);background:linear-gradient(180deg,rgba(87,15,27,.42),rgba(69,10,10,.34))}
+.ca-del:hover,.ca-del:active{background:linear-gradient(180deg,rgba(127,29,29,.54),rgba(91,18,18,.44));color:#fff1f2;border-color:rgba(248,113,113,.36)}
+@keyframes fwdSweep{0%,100%{transform:translateX(-180%) rotate(18deg)}55%{transform:translateX(420%) rotate(18deg)}}
+.card.move-confirm{animation:moveConfirm .55s ease}
+@keyframes moveConfirm{0%{transform:scale(.985);box-shadow:0 0 0 rgba(99,102,241,0)}35%{transform:scale(1.01);box-shadow:0 0 0 3px rgba(99,102,241,.18),0 16px 28px rgba(59,130,246,.18)}100%{transform:scale(1);box-shadow:0 10px 18px rgba(2,6,23,.18)}}
+.card.swipe-ready{transition:transform .16s ease,box-shadow .16s ease}
+.card.swiping-left{transform:translateX(-8px);box-shadow:0 16px 28px rgba(6,95,70,.18)}
+.card.swiping-right{transform:translateX(8px);box-shadow:0 16px 28px rgba(30,41,59,.2)}
 .board-cover-zone{padding:18px 14px;margin-bottom:10px}
 #board-cover-preview-wrap{margin-bottom:10px}
 #board-cover-preview{max-height:150px;object-fit:cover}
-@media(max-width:767px){body{padding-bottom:76px}.screen{padding:14px}#screen-boards{padding:16px}#screen-board{padding:14px 12px 6px}.board-hdr{padding:14px;border-radius:18px}.board-title-text{font-size:18px}.boards-grid{grid-template-columns:1fr}.board-card,.board-add{height:118px}.col{min-width:87vw}.card-acts{grid-template-columns:1fr}.ca{min-height:44px}.bnav{background:#081224;border-top:1px solid rgba(148,163,184,.12)}.bnav-item{color:#7f93ac}.bnav-item.active{color:#818cf8}}
+@media(max-width:767px){body{padding-bottom:76px}.screen{padding:14px}#screen-boards{padding:16px}#screen-board{padding:14px 12px 6px}.board-hdr{padding:14px;border-radius:18px}.board-title-text{font-size:18px}.boards-grid{grid-template-columns:1fr}.board-card,.board-add{height:118px}.col{min-width:87vw}.card-acts-row{flex-direction:column}.ca{min-height:46px}.bnav{background:#081224;border-top:1px solid rgba(148,163,184,.12)}.bnav-item{color:#7f93ac}.bnav-item.active{color:#818cf8}}
 
 
 /* ===== VISUAL OPERAÇÃO: CAPA PADRONIZADA E ALERTAS ===== */
@@ -1023,10 +1033,14 @@ function renderBoard(){
             <div class="av" style="background:${getMemberColor(t.resp)};color:${getMemberTextColor(t.resp)}" title="${esc(t.resp)}">${ini(t.resp)}</div>
           </div>
           ${(edit||move)?`<div class="card-acts">
-            ${edit?`<button class="ca ca-up" onclick="trigUp('${t.id}')">📎 Print</button>`:''}
-            ${move&&t.col>0?`<button class="ca ca-back" onclick="mv('${t.id}',-1)">← Voltar</button>`:''}
-            ${move&&t.col<4?`<button class="ca ca-fwd" onclick="mv('${t.id}',1)">Avançar →</button>`:''}
-            ${edit?`<button class="ca ca-del" onclick="rm('${t.id}')">🗑 Del</button>`:''}
+            ${move?`<div class="card-acts-row">
+              ${t.col>0?`<button class="ca ca-back" onclick="mv('${t.id}',-1)">← Voltar</button>`:''}
+              ${t.col<4?`<button class="ca ca-fwd ${t.col===0?'full':''}" onclick="mv('${t.id}',1)">Avançar →</button>`:''}
+            </div>`:''}
+            ${edit?`<div class="card-acts-row">
+              <button class="ca ca-up" onclick="trigUp('${t.id}')">📎 Print</button>
+              <button class="ca ca-del" onclick="rm('${t.id}')">🗑 Del</button>
+            </div>`:''}
           </div>`:''}
         </div>`).join('')}
       </div>
@@ -1037,15 +1051,74 @@ function renderBoard(){
   document.getElementById('s-done').textContent=done
   document.getElementById('p-pct').textContent=pct+'%'
   document.getElementById('p-bar').style.width=pct+'%'
+  setupSwipeCards()
 }
 
 async function mv(id,dir){
   if(!canMoveTask())return
   const t=tasks.find(x=>x.id===id);if(!t)return
   const newCol=Math.max(0,Math.min(4,t.col+dir)),oldCol=t.col
+  if(newCol===oldCol)return
   setSync(true)
-  try{await db.collection('tasks').doc(id).update({col:newCol});if(newCol!==oldCol)pushNotif(t.title,t.resp,COL_NAMES[newCol])}
-  catch(e){setSync(false,true)}
+  try{
+    await db.collection('tasks').doc(id).update({col:newCol})
+    const card=document.getElementById('card-'+id)
+    if(card){
+      card.classList.remove('move-confirm')
+      void card.offsetWidth
+      card.classList.add('move-confirm')
+      setTimeout(()=>card.classList.remove('move-confirm'),620)
+    }
+    pushNotif(t.title,t.resp,COL_NAMES[newCol])
+    toast(`"${t.title}" → ${COL_NAMES[newCol]}`)
+  }catch(e){setSync(false,true)}
+}
+function setupSwipeCards(){
+  if(!isMobile()||!canMoveTask())return
+  document.querySelectorAll('#board-cols .card').forEach(card=>{
+    if(card.dataset.swipeBound==='1')return
+    card.dataset.swipeBound='1'
+    let startX=0,startY=0,deltaX=0,active=false,taskId=''
+    card.addEventListener('touchstart',e=>{
+      const touch=e.changedTouches&&e.changedTouches[0]
+      if(!touch)return
+      const target=e.target
+      if(target&&target.closest&&target.closest('button,a,.thumb'))return
+      startX=touch.clientX
+      startY=touch.clientY
+      deltaX=0
+      active=true
+      taskId=card.id.replace('card-','')
+      card.classList.add('swipe-ready')
+    },{passive:true})
+    card.addEventListener('touchmove',e=>{
+      if(!active)return
+      const touch=e.changedTouches&&e.changedTouches[0]
+      if(!touch)return
+      deltaX=touch.clientX-startX
+      const deltaY=Math.abs(touch.clientY-startY)
+      if(deltaY>Math.abs(deltaX)&&deltaY>12){
+        active=false
+        card.classList.remove('swiping-left','swiping-right')
+        return
+      }
+      card.classList.toggle('swiping-left',deltaX<-18)
+      card.classList.toggle('swiping-right',deltaX>18)
+    },{passive:true})
+    card.addEventListener('touchend',()=>{
+      if(!active)return
+      active=false
+      card.classList.remove('swiping-left','swiping-right')
+      const task=tasks.find(x=>x.id===taskId)
+      if(!task)return
+      if(deltaX<-72&&task.col<4)mv(taskId,1)
+      else if(deltaX>72&&task.col>0)mv(taskId,-1)
+    })
+    card.addEventListener('touchcancel',()=>{
+      active=false
+      card.classList.remove('swiping-left','swiping-right')
+    })
+  })
 }
 async function rm(id){setSync(true);try{await db.collection('tasks').doc(id).delete()}catch(e){setSync(false,true)}}
 
