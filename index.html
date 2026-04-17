@@ -388,8 +388,8 @@ body{background:linear-gradient(180deg,#0f172a 0%,#111827 100%);color:#e2e8f0}
 <div id="login-screen">
   <div class="login-box">
     <div class="login-logo">
-      <div class="login-logo-icon">L</div>
-      <span class="login-logo-text">LonaBoard</span>
+      <div class="login-logo-icon"><img src="logo.png" style="width:100%;height:100%;object-fit:contain;"></div>
+      <span class="login-logo-text">PRINT STATUS</span>
     </div>
     <div class="login-title" id="login-mode-title">Entrar na conta</div>
     <div id="login-setup-hint" style="display:none;margin:-6px 0 18px;text-align:center;font-size:12px;color:#8c9bab;line-height:1.5">
@@ -420,7 +420,7 @@ body{background:linear-gradient(180deg,#0f172a 0%,#111827 100%);color:#e2e8f0}
 <div id="app" style="display:none">
 
 <div class="hdr">
-  <div class="logo"><div class="logo-icon">L</div><span>LonaBoard</span></div>
+  <div class="logo"><div class="logo-icon"><img src="logo.png" style="width:100%;height:100%;object-fit:contain;"></div><span>PRINT STATUS</span></div>
   <div class="hdr-right">
     <button class="back-btn" id="back-btn" onclick="goHome()">← Quadros</button>
     <button class="notif-bell" onclick="goTab('notifs')" title="Notificações">
@@ -648,8 +648,8 @@ body{background:linear-gradient(180deg,#0f172a 0%,#111827 100%);color:#e2e8f0}
 <script>
 const BOARD_COLORS=['#3c3489','#185fa5','#0f6e56','#854f0b','#993c1d','#72243e','#444441','#a32d2d']
 const MEMBER_COLORS=['#3c3489','#085041','#712b13','#72243e','#0c447c','#854f0b','#444441','#993c1d']
-const COLS=[{cls:'c0',dot:'d0',label:'A FAZER',idx:0},{cls:'c1',dot:'d1',label:'EM IMPRESSÃO',idx:1},{cls:'c2',dot:'d2',label:'ACABAMENTO',idx:2},{cls:'c3',dot:'d3',label:'REVISÃO',idx:3},{cls:'c4',dot:'d4',label:'CONCLUÍDO',idx:4}]
-const COL_NAMES=['A Fazer','Em Impressão','Acabamento','Revisão','Concluído']
+const COLS=[{cls:'c0',dot:'d0',label:'A FAZER',idx:0},{cls:'c1',dot:'d1',label:'EM ANDAMENTO',idx:1},{cls:'c2',dot:'d2',label:'ACABAMENTO',idx:2},{cls:'c3',dot:'d3',label:'REVISÃO',idx:3},{cls:'c4',dot:'d4',label:'CONCLUÍDO',idx:4}]
+const COL_NAMES=['A Fazer','Em Andamento','Acabamento','Revisão','Concluído']
 const TABS=['boards','team','notifs','perms']
 const ini=n=>(n||'?').split(' ').map(x=>x[0]).join('').substring(0,2).toUpperCase()
 const esc=s=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')
@@ -1337,7 +1337,7 @@ function savePushoverCreds(){
 async function sendPushover(title,message){
   const token=localStorage.getItem('po_token')?.trim(),user=localStorage.getItem('po_user')?.trim()
   if(!token||!user)return
-  try{await fetch('https://api.pushover.net/1/messages.json',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({token,user,title:'LonaBoard — '+title,message})})}
+  try{await fetch('https://api.pushover.net/1/messages.json',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({token,user,title:'PRINT STATUS — '+title,message})})}
   catch(e){}
 }
 async function testPushover(){
@@ -1347,7 +1347,7 @@ async function testPushover(){
   if(!token||!user){st.textContent='Preencha App Token e User Key';st.style.color='#f09595';return}
   st.textContent='Enviando...';st.style.color='#596773'
   try{
-    const r=await fetch('https://api.pushover.net/1/messages.json',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({token,user,title:'LonaBoard — Teste',message:'✅ Pushover configurado com sucesso!'})})
+    const r=await fetch('https://api.pushover.net/1/messages.json',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({token,user,title:'PRINT STATUS — Teste',message:'✅ Pushover configurado com sucesso!'})})
     const data=await r.json()
     st.textContent=data.status===1?'✓ Enviado!':'✗ '+(data.errors||[]).join(', ')
     st.style.color=data.status===1?'#5dcaa5':'#f09595'
@@ -1355,14 +1355,14 @@ async function testPushover(){
 }
 
 function pushNotif(taskTitle,resp,newStatus){
-  const colColors={'A Fazer':'#6c5ce7','Em Impressão':'#378add','Acabamento':'#ef9f27','Revisão':'#0ea5e9','Concluído':'#1d9e75'}
+  const colColors={'A Fazer':'#6c5ce7','Em Andamento':'#378add','Acabamento':'#ef9f27','Revisão':'#0ea5e9','Concluído':'#1d9e75'}
   const entry={text:`"${taskTitle}" movida para ${newStatus}`,sub:`Responsável: ${resp||'–'}`,color:colColors[newStatus]||'#6c5ce7',time:new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}
   notifHistory.unshift(entry);if(notifHistory.length>30)notifHistory.pop()
   unreadCount++;updateBadge();renderNotifs()
   if(isMobile()){
     sendPushover(newStatus,`"${taskTitle}" → ${newStatus}\nResponsável: ${resp||'–'}`)
   }else if(notifsEnabled&&Notification.permission==='granted'){
-    try{new Notification('LonaBoard',{body:`"${taskTitle}" → ${newStatus}\nResponsável: ${resp||'–'}`,icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="%236c5ce7"/><text x="12" y="17" text-anchor="middle" font-size="14" fill="white" font-weight="bold">L</text></svg>'})}catch(e){}
+    try{new Notification('PRINT STATUS',{body:`"${taskTitle}" → ${newStatus}\nResponsável: ${resp||'–'}`,icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="%236c5ce7"/><text x="12" y="17" text-anchor="middle" font-size="14" fill="white" font-weight="bold">L</text></svg>'})}catch(e){}
   }
 }
 
