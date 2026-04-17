@@ -648,8 +648,8 @@ body{background:linear-gradient(180deg,#0f172a 0%,#111827 100%);color:#e2e8f0}
 <script>
 const BOARD_COLORS=['#3c3489','#185fa5','#0f6e56','#854f0b','#993c1d','#72243e','#444441','#a32d2d']
 const MEMBER_COLORS=['#3c3489','#085041','#712b13','#72243e','#0c447c','#854f0b','#444441','#993c1d']
-const COLS=[{cls:'c0',dot:'d0',label:'A FAZER',idx:0},{cls:'c1',dot:'d1',label:'EM ANDAMENTO',idx:1},{cls:'c2',dot:'d2',label:'ACABAMENTO',idx:2},{cls:'c3',dot:'d3',label:'REVISÃO',idx:3},{cls:'c4',dot:'d4',label:'CONCLUÍDO',idx:4}]
-const COL_NAMES=['A Fazer','Em Andamento','Acabamento','Revisão','Concluído']
+const COLS=[{cls:'c0',dot:'d0',label:'A FAZER',idx:0},{cls:'c1',dot:'d1',label:'EM IMPRESSÃO',idx:1},{cls:'c2',dot:'d2',label:'ACABAMENTO',idx:2},{cls:'c3',dot:'d3',label:'REVISÃO',idx:3},{cls:'c4',dot:'d4',label:'CONCLUÍDO',idx:4}]
+const COL_NAMES=['A Fazer','Em Impressão','Acabamento','Revisão','Concluído']
 const TABS=['boards','team','notifs','perms']
 const ini=n=>(n||'?').split(' ').map(x=>x[0]).join('').substring(0,2).toUpperCase()
 const esc=s=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')
@@ -1355,7 +1355,7 @@ async function testPushover(){
 }
 
 function pushNotif(taskTitle,resp,newStatus){
-  const colColors={'A Fazer':'#6c5ce7','Em Andamento':'#378add','Acabamento':'#ef9f27','Revisão':'#0ea5e9','Concluído':'#1d9e75'}
+  const colColors={'A Fazer':'#6c5ce7','Em Impressão':'#378add','Acabamento':'#ef9f27','Revisão':'#0ea5e9','Concluído':'#1d9e75'}
   const entry={text:`"${taskTitle}" movida para ${newStatus}`,sub:`Responsável: ${resp||'–'}`,color:colColors[newStatus]||'#6c5ce7',time:new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}
   notifHistory.unshift(entry);if(notifHistory.length>30)notifHistory.pop()
   unreadCount++;updateBadge();renderNotifs()
